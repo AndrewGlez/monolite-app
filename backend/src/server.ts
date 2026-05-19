@@ -7,6 +7,8 @@ import { env } from "#/shared/config/env.ts";
 import { prisma } from "#/infrastructure/database/prisma/client.ts";
 import { errorHandler } from "#/infrastructure/http/middleware/error-handler.ts";
 import { swaggerSpec } from "#/infrastructure/http/swagger.ts";
+import { authRoutes } from "#/infrastructure/http/routes/auth.routes.ts";
+import { userRoutes } from "#/infrastructure/http/routes/user.routes.ts";
 
 const app: Express = express();
 
@@ -19,6 +21,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 app.use(errorHandler);
 

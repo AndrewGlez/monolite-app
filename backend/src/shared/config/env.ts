@@ -28,6 +28,22 @@ class EnvConfig {
     this._env = result.data;
   }
 
+  get nodeEnv(): string {
+    return this._env.NODE_ENV;
+  }
+
+  get databaseUrl(): string {
+    return this._env.DATABASE_URL;
+  }
+
+  get jwtSecret(): string {
+    return this._env.JWT_SECRET;
+  }
+
+  get jwtExpiresIn(): string {
+    return this._env.JWT_EXPIRES_IN;
+  }
+
   static getInstance(): EnvConfig {
     if (!EnvConfig.instance) {
       EnvConfig.instance = new EnvConfig();

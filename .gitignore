@@ -1,4 +1,5 @@
 node_modules
+.atl/
 .DS_Store
 dist
 dist-ssr

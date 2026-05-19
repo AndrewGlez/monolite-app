@@ -1,5 +1,6 @@
-import { env } from "process";
-import { PrismaClient } from "../generated/prisma";
+import { env } from "#/shared/config/env.ts";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../../../generated/prisma/client.js";
 
 class PrismaDatabase {
   private static instance: PrismaClient;
@@ -8,8 +9,15 @@ class PrismaDatabase {
 
   static getInstance(): PrismaClient {
     if (!PrismaDatabase.instance) {
+      const adapter = new PrismaPg({
+        connectionString: env.databaseUrl,
+      });
       PrismaDatabase.instance = new PrismaClient({
-        log: env.isDevelopment ? ["query", "warn", "error"] : ["warn", "error"],
+        adapter,
+        log:
+          env.nodeEnv === "development"
+            ? ["query", "warn", "error"]
+            : ["warn", "error"],
       });
     }
     return PrismaDatabase.instance;

@@ -159,7 +159,7 @@ userRoutes.get(
   adminMiddleware,
   validate(listUsersSchema),
   async (req, res) => {
-    const { page, limit, search } = req.query as unknown as {
+    const { page, limit, search } = (req.validated.query ?? {}) as {
       page: number;
       limit: number;
       search?: string;

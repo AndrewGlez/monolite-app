@@ -20,11 +20,11 @@ export function validate(schema: ValidationSchema) {
         query: req.query,
         params: req.params,
       });
-      if (result.body !== undefined) req.body = result.body;
-      if (result.query !== undefined)
-        req.query = result.query as typeof req.query;
-      if (result.params !== undefined)
-        req.params = result.params as typeof req.params;
+      (req as Request & { validated: { body?: unknown; query?: unknown; params?: unknown } }).validated = {
+        body: result.body,
+        query: result.query,
+        params: result.params,
+      };
       next();
     } catch (err) {
       if (err instanceof ZodError) {

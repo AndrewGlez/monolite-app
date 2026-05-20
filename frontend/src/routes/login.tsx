@@ -11,8 +11,10 @@ function LoginPage() {
         <h1 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h1>
         <LoginForm />
         <p className="mt-4 text-center text-sm text-gray-600">
-          ¿No tenés cuenta?{' '}
-          <Link to="/register" className="text-blue-600 hover:underline">Registrate</Link>
+          ¿No tienes cuenta?{' '}
+          <Link to="/register" className="text-blue-600 hover:underline">
+            Registrate
+          </Link>
         </p>
       </Card>
     </div>

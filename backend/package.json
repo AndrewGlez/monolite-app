@@ -11,6 +11,7 @@
     "start": "node dist/server.js",
     "test": "vitest run",
     "lint": "eslint src --ext .ts",
+    "format": "prettier --write . && eslint --fix",
     "db:generate": "dotenv -e ../.env.local -- prisma generate",
     "db:push": "dotenv -e ../.env.local -- prisma db push",
     "db:migrate": "dotenv -e ../.env.local -- prisma migrate dev",
@@ -31,6 +32,7 @@
     "zod": "^3.24.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
@@ -41,11 +43,14 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.7",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^9.20.0",
+    "eslint": "^10.4.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.6.0",
     "prettier": "^3.8.1",
     "supertest": "^7.0.0",
     "tsx": "^4.19.0",
     "typescript": "^6.0.2",
+    "typescript-eslint": "^8.59.4",
     "vitest": "^3.0.0"
   }
 }

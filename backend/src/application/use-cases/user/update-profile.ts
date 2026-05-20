@@ -7,7 +7,10 @@ import { UserNotFoundError } from "#/domain/errors/index.js";
 export class UpdateProfile implements UpdateProfileUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(userId: string, dto: UpdateProfileDTO): Promise<UserResponseDTO> {
+  async execute(
+    userId: string,
+    dto: UpdateProfileDTO,
+  ): Promise<UserResponseDTO> {
     if (!dto.name || dto.name.trim().length === 0) {
       throw new Error("Name is required");
     }

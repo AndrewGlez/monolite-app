@@ -39,23 +39,15 @@ const authenticateUser = new AuthenticateUser(
 
 export const authRoutes: RouterType = Router();
 
-authRoutes.post(
-  "/register",
-  validate(registerSchema),
-  async (req, res) => {
-    const result = await registerUser.execute(req.body);
-    res.status(201).json({
-      message: "Usuario registrado exitosamente",
-      user: result.user,
-    });
-  },
-);
+authRoutes.post("/register", validate(registerSchema), async (req, res) => {
+  const result = await registerUser.execute(req.body);
+  res.status(201).json({
+    message: "Usuario registrado exitosamente",
+    user: result.user,
+  });
+});
 
-authRoutes.post(
-  "/login",
-  validate(loginSchema),
-  async (req, res) => {
-    const result = await authenticateUser.execute(req.body);
-    res.status(200).json(result);
-  },
-);
+authRoutes.post("/login", validate(loginSchema), async (req, res) => {
+  const result = await authenticateUser.execute(req.body);
+  res.status(200).json(result);
+});

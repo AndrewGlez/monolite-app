@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { ZodError, ZodSchema } from "zod";
 import { validate } from "./validate.js";
 import { AppError } from "./error-handler.js";
@@ -10,7 +10,13 @@ describe("validate middleware", () => {
     const schema = {
       parse: () => {
         throw new ZodError([
-          { message: "Required", path: ["body", "email"], code: "invalid_type", expected: "string", received: "undefined" },
+          {
+            message: "Required",
+            path: ["body", "email"],
+            code: "invalid_type",
+            expected: "string",
+            received: "undefined",
+          },
         ]);
       },
     } as unknown as ZodSchema<{ body?: unknown }>;

@@ -1,14 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { AppError } from "#/shared/errors/index.ts";
 
 export { AppError };
 
-export function errorHandler(
-  err: Error,
-  _req: Request,
-  res: Response,
-  _next: NextFunction,
-): void {
+export function errorHandler(err: Error, _req: Request, res: Response): void {
   const statusCode = err instanceof AppError ? err.statusCode : 500;
   const message =
     process.env.NODE_ENV === "development"

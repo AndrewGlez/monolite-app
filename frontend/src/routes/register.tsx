@@ -11,8 +11,10 @@ function RegisterPage() {
         <h1 className="text-2xl font-bold mb-6 text-center">Crear Cuenta</h1>
         <RegisterForm />
         <p className="mt-4 text-center text-sm text-gray-600">
-          ¿Ya tenés cuenta?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">Iniciar Sesión</Link>
+          ¿Ya tienes cuenta?{' '}
+          <Link to="/login" className="text-blue-600 hover:underline">
+            Iniciar Sesión
+          </Link>
         </p>
       </Card>
     </div>

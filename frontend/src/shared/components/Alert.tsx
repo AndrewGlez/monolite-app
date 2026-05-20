@@ -14,7 +14,9 @@ export function Alert({ type, message, className }: AlertProps) {
   }
 
   return (
-    <div className={cn('border-l-4 p-4 rounded-r-lg', variants[type], className)}>
+    <div
+      className={cn('border-l-4 p-4 rounded-r-lg', variants[type], className)}
+    >
       {message}
     </div>
   )

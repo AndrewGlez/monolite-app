@@ -1,7 +1,12 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
+import type { ReactNode } from 'react'
 import { api } from '#/lib/api/client'
 import { useLocalStorage } from '#/shared/hooks/useLocalStorage'
-import type { AuthResponse, UserResponse, MessageResponse } from '#/shared/types/api'
+import type {
+  AuthResponse,
+  UserResponse,
+  MessageResponse,
+} from '#/shared/types/api'
 
 interface AuthState {
   user: UserResponse | null
@@ -19,15 +24,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useLocalStorage<string | null>('token', null)
   const [user, setUser] = useState<UserResponse | null>(null)
 
-  const login = useCallback(async (email: string, password: string) => {
-    const res = await api.post<AuthResponse>('/auth/login', { email, password })
-    setToken(res.token)
-    setUser(res.user)
-  }, [setToken])
+  const login = useCallback(
+    async (email: string, password: string) => {
+      const res = await api.post<AuthResponse>('/auth/login', {
+        email,
+        password,
+      })
+      setToken(res.token)
+      setUser(res.user)
+    },
+    [setToken],
+  )
 
-  const register = useCallback(async (name: string, email: string, password: string) => {
-    await api.post<MessageResponse>('/auth/register', { name, email, password })
-  }, [])
+  const register = useCallback(
+    async (name: string, email: string, password: string) => {
+      await api.post<MessageResponse>('/auth/register', {
+        name,
+        email,
+        password,
+      })
+    },
+    [],
+  )
 
   const logout = useCallback(() => {
     setToken(null)

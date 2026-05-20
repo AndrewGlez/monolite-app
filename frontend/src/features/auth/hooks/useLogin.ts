@@ -9,18 +9,21 @@ export function useLogin() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const execute = useCallback(async (data: LoginInput) => {
-    setLoading(true)
-    setError(null)
-    try {
-      await login(data.email, data.password)
-      navigate({ to: '/profile' })
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al iniciar sesión')
-    } finally {
-      setLoading(false)
-    }
-  }, [login, navigate])
+  const execute = useCallback(
+    async (data: LoginInput) => {
+      setLoading(true)
+      setError(null)
+      try {
+        await login(data.email, data.password)
+        navigate({ to: '/profile' })
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Error al iniciar sesión')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [login, navigate],
+  )
 
   return { execute, loading, error }
 }

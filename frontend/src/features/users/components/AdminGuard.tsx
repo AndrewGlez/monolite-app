@@ -27,8 +27,12 @@ export function AdminGuard({ children }: AdminGuardProps) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="bg-white rounded-xl shadow-md p-8 text-center max-w-md">
-          <h2 className="text-2xl font-bold text-red-600 mb-2">Acceso denegado</h2>
-          <p className="text-gray-600">No tenés permisos para acceder a esta sección.</p>
+          <h2 className="text-2xl font-bold text-red-600 mb-2">
+            Acceso denegado
+          </h2>
+          <p className="text-gray-600">
+            No tienes permisos para acceder a esta sección.
+          </p>
         </div>
       </div>
     )

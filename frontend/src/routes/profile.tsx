@@ -12,12 +12,24 @@ function ProfilePage() {
     <AuthGuard>
       <div className="min-h-screen bg-gray-50">
         <nav className="bg-white shadow-sm p-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-blue-600">Gestión de Usuarios</Link>
+          <Link to="/" className="text-xl font-bold text-blue-600">
+            Gestión de Usuarios
+          </Link>
           <div className="flex gap-4 items-center">
             {user?.role === 'admin' && (
-              <Link to="/admin/users" className="text-sm text-gray-600 hover:text-blue-600">Administrar</Link>
+              <Link
+                to="/admin/users"
+                className="text-sm text-gray-600 hover:text-blue-600"
+              >
+                Administrar
+              </Link>
             )}
-            <button onClick={logout} className="text-sm text-red-600 hover:underline">Cerrar Sesión</button>
+            <button
+              onClick={logout}
+              className="text-sm text-red-600 hover:underline"
+            >
+              Cerrar Sesión
+            </button>
           </div>
         </nav>
         <main className="max-w-2xl mx-auto p-8">

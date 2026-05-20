@@ -59,10 +59,7 @@ export class PrismaUserRepository implements UserRepository {
     return mapToUserRow(user);
   }
 
-  async update(
-    id: string,
-    data: Partial<CreateUserRow>,
-  ): Promise<UserRow> {
+  async update(id: string, data: Partial<CreateUserRow>): Promise<UserRow> {
     const user = await prisma.user.update({
       where: { id },
       data: {

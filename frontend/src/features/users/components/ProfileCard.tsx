@@ -10,7 +10,12 @@ import { User, Mail, Shield, Calendar } from 'lucide-react'
 
 export function ProfileCard() {
   const { user, loading, error, refetch } = useProfile()
-  const { execute: updateProfile, loading: saving, error: updateError, success } = useUpdateProfile(refetch)
+  const {
+    execute: updateProfile,
+    loading: saving,
+    error: updateError,
+    success,
+  } = useUpdateProfile(refetch)
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState('')
 
@@ -60,7 +65,9 @@ export function ProfileCard() {
         </div>
         <div>
           <h2 className="text-2xl font-bold">{user.name}</h2>
-          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-1 ${roleBadgeClass}`}>
+          <span
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-1 ${roleBadgeClass}`}
+          >
             {user.role === 'admin' ? (
               <>
                 <Shield className="w-3 h-3 mr-1" />
@@ -93,12 +100,18 @@ export function ProfileCard() {
             disabled={saving}
           />
           {updateError && <Alert type="error" message={updateError} />}
-          {success && <Alert type="success" message="Perfil actualizado correctamente" />}
+          {success && (
+            <Alert type="success" message="Perfil actualizado correctamente" />
+          )}
           <div className="flex gap-3">
             <Button onClick={handleSave} loading={saving}>
               Guardar
             </Button>
-            <Button variant="secondary" onClick={handleCancel} disabled={saving}>
+            <Button
+              variant="secondary"
+              onClick={handleCancel}
+              disabled={saving}
+            >
               Cancelar
             </Button>
           </div>
@@ -110,7 +123,10 @@ export function ProfileCard() {
           </Button>
           {success && (
             <div className="mt-3">
-              <Alert type="success" message="Perfil actualizado correctamente" />
+              <Alert
+                type="success"
+                message="Perfil actualizado correctamente"
+              />
             </div>
           )}
         </div>

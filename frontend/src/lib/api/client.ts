@@ -4,7 +4,10 @@ function getToken(): string | null {
   return localStorage.getItem('token')
 }
 
-async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+async function request<T>(
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<T> {
   const token = getToken()
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -12,7 +15,10 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     ...options.headers,
   }
 
-  const response = await fetch(`${API_BASE}${endpoint}`, { ...options, headers })
+  const response = await fetch(`${API_BASE}${endpoint}`, {
+    ...options,
+    headers,
+  })
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({ error: 'Error de red' }))

@@ -7,20 +7,25 @@ export function useUpdateProfile(refetch: () => void) {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
 
-  const execute = useCallback(async (data: UpdateProfileInput) => {
-    setLoading(true)
-    setError(null)
-    setSuccess(false)
-    try {
-      await userService.updateProfile(data)
-      setSuccess(true)
-      refetch()
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al actualizar el perfil')
-    } finally {
-      setLoading(false)
-    }
-  }, [refetch])
+  const execute = useCallback(
+    async (data: UpdateProfileInput) => {
+      setLoading(true)
+      setError(null)
+      setSuccess(false)
+      try {
+        await userService.updateProfile(data)
+        setSuccess(true)
+        refetch()
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : 'Error al actualizar el perfil',
+        )
+      } finally {
+        setLoading(false)
+      }
+    },
+    [refetch],
+  )
 
   return { execute, loading, error, success }
 }

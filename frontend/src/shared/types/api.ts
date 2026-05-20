@@ -17,6 +17,10 @@ export interface MessageResponse {
   user: UserResponse
 }
 
-export interface UsersListResponse {
+export interface PaginatedUsersResponse {
   users: UserResponse[]
+  total: number
+  page: number
+  limit: number
+  totalPages: number
 }

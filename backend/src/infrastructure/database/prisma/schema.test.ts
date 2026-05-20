@@ -1,8 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "fs";
-import { resolve } from "path";
+import { resolve, dirname } from "path";
+import { fileURLToPath } from "url";
 
-const schemaPath = resolve(process.cwd(), "backend/prisma/schema.prisma");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const schemaPath = resolve(__dirname, "../../../../prisma/schema.prisma");
 const schema = readFileSync(schemaPath, "utf-8");
 
 describe("prisma schema", () => {

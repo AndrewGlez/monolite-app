@@ -1,5 +1,11 @@
-import type { UserResponseDTO } from "#/application/dto/user-response.dto.js";
+import type { PaginatedUsersDTO } from "#/application/dto/paginated-users.dto.js";
+
+export interface ListUsersInput {
+  page: number;
+  limit: number;
+  search?: string;
+}
 
 export interface ListUsersUseCase {
-  execute(): Promise<UserResponseDTO[]>;
+  execute(input: ListUsersInput): Promise<PaginatedUsersDTO>;
 }

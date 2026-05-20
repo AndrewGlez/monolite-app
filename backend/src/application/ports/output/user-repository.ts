@@ -7,10 +7,24 @@ export interface CreateUserRow {
   role: "user" | "admin";
 }
 
+export interface FindAllOptions {
+  page: number;
+  limit: number;
+  search?: string;
+}
+
+export interface PaginatedResult<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 export interface UserRepository {
   findByEmail(email: string): Promise<UserRow | null>;
   findById(id: string): Promise<UserRow | null>;
   create(data: CreateUserRow): Promise<UserRow>;
   update(id: string, data: Partial<CreateUserRow>): Promise<UserRow>;
-  findAll(): Promise<UserRow[]>;
+  findAll(options: FindAllOptions): Promise<PaginatedResult<UserRow>>;
 }

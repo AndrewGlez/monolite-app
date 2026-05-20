@@ -1,6 +1,8 @@
 import { prisma } from "#/infrastructure/database/prisma/client.ts";
 import type {
   CreateUserRow,
+  FindAllOptions,
+  PaginatedResult,
   UserRepository,
 } from "#/application/ports/output/user-repository.ts";
 import type { UserRow } from "#/domain/entities/user.ts";
@@ -74,8 +76,35 @@ export class PrismaUserRepository implements UserRepository {
     return mapToUserRow(user);
   }
 
-  async findAll(): Promise<UserRow[]> {
-    const users = await prisma.user.findMany();
-    return users.map(mapToUserRow);
+  async findAll(options: FindAllOptions): Promise<PaginatedResult<UserRow>> {
+    const { page, limit, search } = options;
+    const skip = (page - 1) * limit;
+
+    const where = search
+      ? {
+          OR: [
+            { name: { contains: search, mode: "insensitive" as const } },
+            { email: { contains: search, mode: "insensitive" as const } },
+          ],
+        }
+      : {};
+
+    const [users, total] = await Promise.all([
+      prisma.user.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.user.count({ where }),
+    ]);
+
+    return {
+      data: users.map(mapToUserRow),
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 }

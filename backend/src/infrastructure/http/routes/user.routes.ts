@@ -65,19 +65,51 @@ import { validate } from "#/infrastructure/http/middleware/validate.ts";
  * @openapi
  * /api/users:
  *   get:
- *     summary: List all users (admin only)
+ *     summary: List all users (admin only) with pagination and search
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           default: 10
+ *         description: Items per page
+ *       - in: query
+ *         name: search
+ *         schema:
+ *           type: string
+ *         description: Search by name or email
  *     responses:
  *       200:
- *         description: List of users
+ *         description: Paginated list of users
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
+ *               type: object
+ *               properties:
+ *                 users:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 total:
+ *                   type: integer
+ *                 page:
+ *                   type: integer
+ *                 limit:
+ *                   type: integer
+ *                 totalPages:
+ *                   type: integer
  *       401:
  *         description: Unauthorized
  *       403:
@@ -87,6 +119,14 @@ import { validate } from "#/infrastructure/http/middleware/validate.ts";
 const updateProfileSchema = z.object({
   body: z.object({
     name: z.string().min(1),
+  }),
+});
+
+const listUsersSchema = z.object({
+  query: z.object({
+    page: z.coerce.number().int().min(1).default(1),
+    limit: z.coerce.number().int().min(1).max(100).default(10),
+    search: z.string().optional(),
   }),
 });
 
@@ -113,7 +153,18 @@ userRoutes.put(
   },
 );
 
-userRoutes.get("/", authMiddleware, adminMiddleware, async (_req, res) => {
-  const result = await listUsers.execute();
-  res.status(200).json(result);
-});
+userRoutes.get(
+  "/",
+  authMiddleware,
+  adminMiddleware,
+  validate(listUsersSchema),
+  async (req, res) => {
+    const { page, limit, search } = req.query as unknown as {
+      page: number;
+      limit: number;
+      search?: string;
+    };
+    const result = await listUsers.execute({ page, limit, search });
+    res.status(200).json(result);
+  },
+);

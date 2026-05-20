@@ -9,6 +9,7 @@ import { errorHandler } from "#/infrastructure/http/middleware/error-handler.ts"
 import { swaggerSpec } from "#/infrastructure/http/swagger.ts";
 import { authRoutes } from "#/infrastructure/http/routes/auth.routes.ts";
 import { userRoutes } from "#/infrastructure/http/routes/user.routes.ts";
+import "#/shared/types/express.d.ts";
 
 const app: Express = express();
 

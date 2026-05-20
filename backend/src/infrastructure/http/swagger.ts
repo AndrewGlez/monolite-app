@@ -1,15 +1,7 @@
-import fs from "fs";
-import path from "path";
-import { env } from "#/shared/config/env.ts";
+import swaggerJsdoc from "swagger-jsdoc";
 
-const swaggerOutputPath = path.join(__dirname, "swagger-output.json");
-
-let swaggerSpec: object;
-
-if (fs.existsSync(swaggerOutputPath)) {
-  swaggerSpec = JSON.parse(fs.readFileSync(swaggerOutputPath, "utf-8"));
-} else {
-  swaggerSpec = {
+const options: swaggerJsdoc.Options = {
+  definition: {
     openapi: "3.0.0",
     info: {
       title: "User Management API",
@@ -18,12 +10,12 @@ if (fs.existsSync(swaggerOutputPath)) {
     },
     servers: [
       {
-        url: `http://localhost:${env.port || 3000}`,
+        url: `http://localhost:${process.env.PORT || 3000}`,
         description: "Development server",
       },
     ],
-    paths: {},
-  };
-}
+  },
+  apis: ["./src/infrastructure/http/routes/*.ts"],
+};
 
-export { swaggerSpec };
+export const swaggerSpec = swaggerJsdoc(options);

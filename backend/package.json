@@ -6,8 +6,7 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "npm run swagger:gen && dotenv -e ../.env.local -- tsx watch src/server.ts",
-    "swagger:gen": "tsx src/scripts/generate-swagger.ts",
+    "dev": "dotenv -e ../.env.local -- tsx watch src/server.ts",
     "build": "tsdown src/server.ts",
     "start": "node dist/server.js",
     "test": "vitest run",

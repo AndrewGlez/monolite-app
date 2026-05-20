@@ -1,4 +1,4 @@
-import { AppError } from "../../shared/errors/index.js";
+import { AppError } from "#/shared/errors/index.ts";
 
 export class InvalidCredentialsError extends AppError {
   constructor() {

@@ -44,7 +44,10 @@ authRoutes.post(
   validate(registerSchema),
   async (req, res) => {
     const result = await registerUser.execute(req.body);
-    res.status(201).json(result);
+    res.status(201).json({
+      message: "Usuario registrado exitosamente",
+      user: result.user,
+    });
   },
 );
 

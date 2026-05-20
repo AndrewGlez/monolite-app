@@ -4,7 +4,7 @@ import type {
   UserRepository,
 } from "#/application/ports/output/user-repository.ts";
 import type { UserRow } from "#/domain/entities/user.ts";
-import { Role } from "../../../generated/prisma/enums.ts";
+import { Role } from "#/generated/prisma/enums.ts";
 
 function mapPrismaRole(role: Role): "user" | "admin" {
   return role === Role.ADMIN ? "admin" : "user";

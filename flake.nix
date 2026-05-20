@@ -17,8 +17,10 @@
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
             prisma_7
+            prisma-engines_7
             openssl
           ];
+          PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines_7}/bin/schema-engine";
         };
       }
     );

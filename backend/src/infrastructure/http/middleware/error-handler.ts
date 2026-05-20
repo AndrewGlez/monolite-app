@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../../../shared/errors/index.js";
+import { AppError } from "#/shared/errors/index.ts";
 
 export { AppError };
 

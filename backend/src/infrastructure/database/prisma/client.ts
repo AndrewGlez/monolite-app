@@ -1,6 +1,6 @@
 import { env } from "#/shared/config/env.ts";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../../../generated/prisma/client.js";
+import { PrismaClient } from "#/generated/prisma/client.js";
 
 class PrismaDatabase {
   private static instance: PrismaClient;

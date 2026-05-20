@@ -30,6 +30,7 @@
     "swagger-autogen": "^2.23.7",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
+    "tsdown": "^0.22.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {

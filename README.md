@@ -1,9 +1,5 @@
 # API REST - Gestión de Usuarios
 
----
-
-## 📋 Descripción
-
 API REST para gestión de usuarios con autenticación JWT, más un frontend React para consumirla. Construido con **Clean Architecture** en el backend y **Screaming Architecture** en el frontend.
 
 ### Funcionalidades
